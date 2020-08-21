@@ -1,13 +1,24 @@
-<h1><% @letters.each do |letter|%>
-<span><%= letter.upcase %></span>
-<% end %></h1>
+<div class="outer">
+  <h1 class="header">New Game</h1>
+
+  <div class="grid">
+    <% @letters.each do |letter|%>
+    <div class="inline"><h1><%= letter.upcase %></h1></div>
+    <% end %>
+  </div>
+
+  <div class="form">
+    <form action="/score" method="post">
+      <label>What's the longest word you can find?</label>
+      <div class="input">
+        <input type="text" name="word">
+        <input type="submit" value="Play" class="button">
+      </div>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= hidden_field_tag :letters, @letters %>
+    <%= hidden_field_tag :start_time, Time.now %>
+    </form>
+  </div>
 
 
-<form action="/score" method="post">
-  <input type="text" name="word">
-  <input type="submit">
-<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-<%= hidden_field_tag :letters, @letters %>
-<%= hidden_field_tag :start_time, Time.now %>
-
-</form>
+</div>

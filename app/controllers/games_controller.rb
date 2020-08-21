@@ -14,11 +14,11 @@ class GamesController < ApplicationController
     @user_letters = params[:letters].upcase
     @user_word = params[:word].upcase
     @win = if included?(@user_word, @user_letters) && api(@user_word)
-             "You won and your score is #{compute_score(params[:word])}"
+             "<strong>Congratulations!</strong> #{params[:word].upcase} is a valid word and your score is #{compute_score(params[:word])}".html_safe
            elsif api(@user_word) == false
-             'Your word is not a valid english word'
+             "Sorry but <b>#{params[:word].upcase}</b> is not a valid english word".html_safe
            else
-             "Sorry but #{params[:word].upcase} cant be built from #{params[:letters].upcase}"
+             "Sorry but <b>#{params[:word].upcase}</b> cant be built from #{params[:letters].upcase}".html_safe
            end
   end
 
